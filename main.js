@@ -23,24 +23,24 @@ log.info('App starting...');
 // THIS SECTION IS NOT REQUIRED
 //-------------------------------------------------------------------
 let template = []
-if (true) {
-  // OS X
-  const name = app.getName();
-  template.unshift({
-    label: name,
-    submenu: [
-      {
-        label: 'About ' + name,
-        role: 'about'
-      },
-      {
-        label: 'Quit',
-        accelerator: 'Command+Q',
-        click() { app.quit(); }
-      },
-    ]
-  })
-}
+// if (true) {
+//   // OS X
+//   const name = app.getName();
+//   template.unshift({
+//     label: name,
+//     submenu: [
+//       {
+//         label: 'About ' + name,
+//         role: 'about'
+//       },
+//       {
+//         label: 'Quit',
+//         accelerator: 'Command+Q',
+//         click() { app.quit(); }
+//       },
+//     ]
+//   })
+// }
 
 
 //-------------------------------------------------------------------
@@ -64,7 +64,7 @@ function createDefaultWindow() {
   win.on('closed', () => {
     win = null;
   });
-  win.loadURL(`file://${__dirname}/version.html#v${app.getVersion()}`);
+  win.loadURL(`file://${__dirname}/version.html#v1`);
   return win;
 }
 autoUpdater.on('checking-for-update', () => {
@@ -85,9 +85,9 @@ autoUpdater.on('download-progress', (progressObj) => {
   log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')';
   sendStatusToWindow(log_message);
 })
-// autoUpdater.on('update-downloaded', (info) => {
-//   sendStatusToWindow('Update downloaded; will install in 5 seconds');
-// });
+autoUpdater.on('update-downloaded', (info) => {
+  sendStatusToWindow('Update downloaded; will install in 5 seconds');
+});
 app.on('ready', function() {
   // Create the Menu
   const menu = Menu.buildFromTemplate(template);
@@ -132,3 +132,7 @@ app.on('window-all-closed', () => {
 app.on('ready', function()  {
   autoUpdater.checkForUpdatesAndNotify()
 });
+
+// app.on('ready', function()  {
+//   autoUpdater.checkForUpdates();
+// });
