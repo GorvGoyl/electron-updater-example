@@ -129,10 +129,10 @@ app.on('window-all-closed', () => {
 //   }, 5000)
 // })
 
-app.on('ready', function()  {
-  autoUpdater.checkForUpdatesAndNotify()
-});
-
 // app.on('ready', function()  {
-//   autoUpdater.checkForUpdates();
+//   autoUpdater.checkForUpdatesAndNotify()
 // });
+
+app.on('ready', function()  {
+  autoUpdater.quitAndInstall(true,true);  
+});
