@@ -85,9 +85,9 @@ autoUpdater.on('download-progress', (progressObj) => {
   log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')';
   sendStatusToWindow(log_message);
 })
-autoUpdater.on('update-downloaded', (info) => {
-  sendStatusToWindow('Update downloaded; will install in 5 seconds');
-});
+// autoUpdater.on('update-downloaded', (info) => {
+//   sendStatusToWindow('Update downloaded; will install in 5 seconds');
+// });
 app.on('ready', function() {
   // Create the Menu
   const menu = Menu.buildFromTemplate(template);
@@ -130,5 +130,5 @@ app.on('window-all-closed', () => {
 // })
 
 app.on('ready', function()  {
-  autoUpdater.checkForUpdates();
+  autoUpdater.checkForUpdatesAndNotify()
 });
